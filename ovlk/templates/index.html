@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVLK</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- CSS 포함 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title">OVLK Welding Process</div>
+        <div class="content">
+            <div class="section">
+                <div class="row">
+                    <div class="name">LH</div>
+                    <div class="status">RUN</div>
+                </div>
+                <div class="row">
+                    <div class="num">
+                        <div class="item num_item">Part No</div>
+                        <div class="text num_text">89311-P1511</div>
+                    </div>
+                    <div class="count">
+                        <div class="item count_item">Count</div>
+                        <div class="text count_text">103</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="barcode">
+                        <div class="item barcode_item">Barcode</div>
+                        <div class="text barcode_text">사양 표기 (내수 유럽 북미)</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="img img1">
+                        <img src="/static/images/lh.png" alt="">
+                        <button class="data-button" onclick="showDataModal('여기에 데이터 내용')">데이터</button>
+                    </div>
+                    <div class="graph">
+                        <canvas id="graph1" class="graph" style="cursor: pointer;"></canvas>
+                        <canvas id="graph2" class="graph" style="cursor: pointer;"></canvas>
+                        <canvas id="graph3" class="graph" style="cursor: pointer;"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="img img2">
+                        <img src="/static/images/img1.jpg" alt="">
+                    </div>
+                    <div class="table">
+                        <table>
+                            <tr>
+                                <td>D6000</td>
+                                <td>D6001</td>
+                                <td>D6002</td>
+                                <td>D6003</td>
+                                <td>D6004</td>
+                            </tr>
+                            <tr>
+                                <td>D6005</td>
+                                <td>D6006</td>
+                                <td>D6007</td>
+                                <td>D6008</td>
+                                <td>D6009</td>
+                            </tr>
+                            <tr>
+                                <td>D6010</td>
+                                <td>D6011</td>
+                                <td>D6012</td>
+                                <td>D6013</td>
+                                <td>D6014</td>
+                            </tr>
+                            <tr>
+                                <td>D6015</td>
+                                <td>D6016</td>
+                                <td>D6017</td>
+                                <td>D6018</td>
+                                <td>D6019</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="row">
+                    <div class="name">RH</div>
+                    <div class="status">RUN</div>
+                </div>
+                <div class="row">
+                    <div class="num">
+                        <div class="item num_item">Part No</div>
+                        <div class="text num_text">89411-P1FD0</div>
+                    </div>
+                    <div class="count">
+                        <div class="item count_item">Count</div>
+                        <div class="text count_text">84</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="barcode">
+                        <div class="item barcode_item">Barcode</div>
+                        <div class="text barcode_text">사양 표기 (내수 유럽 북미)</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="img img1">
+                        <img src="/static/images/rh.png" alt="">
+                        <button class="data-button" onclick="showDataModal('여기에 데이터 내용')">데이터</button>
+                    </div>
+                    <div class="graph">
+                        <canvas id="graph4" class="graph" style="cursor: pointer;"></canvas>
+                        <canvas id="graph5" class="graph" style="cursor: pointer;"></canvas>
+                        <canvas id="graph6" class="graph" style="cursor: pointer;"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="img img2">
+                        <img src="/static/images/img1.jpg" alt="">
+                    </div>
+                    <div class="table">
+                        <table>
+                            <tr>
+                                <td>D6000</td>
+                                <td>D6001</td>
+                                <td>D6002</td>
+                                <td>D6003</td>
+                                <td>D6004</td>
+                            </tr>
+                            <tr>
+                                <td>D6005</td>
+                                <td>D6006</td>
+                                <td>D6007</td>
+                                <td>D6008</td>
+                                <td>D6009</td>
+                            </tr>
+                            <tr>
+                                <td>D6010</td>
+                                <td>D6011</td>
+                                <td>D6012</td>
+                                <td>D6013</td>
+                                <td>D6014</td>
+                            </tr>
+                            <tr>
+                                <td>D6015</td>
+                                <td>D6016</td>
+                                <td>D6017</td>
+                                <td>D6018</td>
+                                <td>D6019</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay" id="modalOverlay"></div>
+
+        <div class="modal" id="dataModal" role="dialog" aria-labelledby="dataModalLabel" aria-describedby="modalDescription" aria-hidden="true">
+    <div class="modal-header">
+        <h5 class="modal-title" id="dataModalLabel">그래프 데이터</h5>
+        <button type="button" class="close" onclick="closeDataModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p id="modalData">여기에 그래프 데이터가 표시됩니다.</p> <!-- ID 수정 -->
+    </div>
+</div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script> <!-- JS 포함 -->
+
+    <script>
+        // 그래프 데이터
+        const graphData = [{
+                id: 'graph1',
+                data: 'Graph 1 데이터'
+            },
+            {
+                id: 'graph2',
+                data: 'Graph 2 데이터'
+            },
+            {
+                id: 'graph3',
+                data: 'Graph 3 데이터'
+            },
+            {
+                id: 'graph4',
+                data: 'Graph 4 데이터'
+            },
+            {
+                id: 'graph5',
+                data: 'Graph 5 데이터'
+            },
+            {
+                id: 'graph6',
+                data: 'Graph 6 데이터'
+            },
+        ];
+
+        // 그래프 생성
+        function createGraph(ctx, label) {
+            const chart = new Chart(ctx, {
+                type: 'line', // 그래프 유형
+                data: {
+                    labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+                    datasets: [{
+                        label: label,
+                        data: [12, 19, 3, 5, 2],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    onClick: (event) => {
+                        const activePoints = chart.getElementsAtEventForMode(event, 'nearest', {
+                            intersect: true
+                        }, false);
+                        if (activePoints.length) {
+                            const index = activePoints[0].index;
+                            showDataModal(graphData.find(g => g.id === ctx.canvas.id).data);
+                        }
+                    }
+                }
+            });
+        }
+
+        // 모달에 데이터 표시
+        function showDataModal(data) {
+            document.getElementById('modalData').innerText = data; // 데이터 내용 표시
+            document.getElementById('modalOverlay').style.display = 'block'; // 오버레이 보이기
+            document.getElementById('dataModal').style.display = 'block'; // 모달 보이기
+        }
+
+        // 모달 닫기
+        function closeDataModal() {
+            document.getElementById('modalOverlay').style.display = 'none'; // 오버레이 숨기기
+            document.getElementById('dataModal').style.display = 'none'; // 모달 숨기기
+        }
+
+        // 각 그래프 생성
+        window.onload = function() {
+            createGraph(document.getElementById('graph1').getContext('2d'), 'Graph 1');
+            createGraph(document.getElementById('graph2').getContext('2d'), 'Graph 2');
+            createGraph(document.getElementById('graph3').getContext('2d'), 'Graph 3');
+            createGraph(document.getElementById('graph4').getContext('2d'), 'Graph 4');
+            createGraph(document.getElementById('graph5').getContext('2d'), 'Graph 5');
+            createGraph(document.getElementById('graph6').getContext('2d'), 'Graph 6');
+        };
+    </script>
+
+</body>
+
+</html>
