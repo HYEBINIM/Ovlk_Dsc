@@ -1,0 +1,128 @@
+.td1 { background-color: red; }
+.td2 { background-color: green; }
+.td3 { background-color: blue; }
+.td4 { background-color: yellow; }
+.td5 { background-color: orange; }
+.td6 { background-color: purple; }
+.td7 { background-color: pink; }
+.td8 { background-color: cyan; }
+.td9 { background-color: lightgrey; }
+.td10 { background-color: brown; }
+.td11 { background-color: teal; }
+.td12 { background-color: navy; }
+.td13 { background-color: olive; }
+.td14 { background-color: maroon; }
+.td15 { background-color: gold; }
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+tr,th,td{
+    border:1px solid black;
+}
+
+td {
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    text-align: center;
+    position: relative;
+    /* 부모 요소 */
+}
+
+.tdmenu {
+    width: 100%;
+    height: 3%;
+}
+
+.tdtitle {
+    width: 100%;
+    height: 7%;
+}
+
+.tdleft {
+    width: 66%;
+    height: 87%;
+}
+
+.tdright {
+    width: 34%;
+    height: 87%;
+}
+
+.tdinfo {
+    width: 100%;
+    height: 3%;
+}
+
+.tdimg {
+    width: 50%;
+    height: 100%;
+}
+
+.tdamp {
+    width: 50%;
+    height: 25%;
+}
+
+.tdvolt {
+    width: 50%;
+    height: 25%;
+}
+
+.tdflow {
+    width: 50%;
+    height: 25%;
+}
+
+.tddata {
+    width: 100%;
+    height: 25%;
+}
+
+.tdplc {
+    width: 100%;
+    height: 33%;
+}
+
+.tdcount {
+    width: 100%;
+    height: 34%;
+}
+
+.tdcontrol {
+    width: 300;
+    height: 33%;
+}
+
+.logo {   
+    width: 250px; 
+    height: 50px;
+}
+
+canvas {
+    position: absolute;
+    /* 자식 요소 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+button{
+    width: 100%;
+    height: 100%;
+}
