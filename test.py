@@ -62,7 +62,7 @@ try:
                         # MAX(id) 가져오기
                         cursor.execute("SELECT MAX(id) FROM plc_data_lh")
                         last_lh_id = cursor.fetchone()[0]
-                        print(f"Last inserted ID (plc_data_lh): {last_lh_id}")
+                        print(f"plc_data_lh 에 추가됨: {last_lh_id}")
                     except MySQLdb.Error as err:
                         print(f"Insert Error: {err}")
 
@@ -85,7 +85,7 @@ try:
                         # MAX(id) 가져오기
                         cursor.execute("SELECT MAX(id) FROM plc_data_rh")
                         last_rh_id = cursor.fetchone()[0]
-                        print(f"Last inserted ID (plc_data_rh): {last_rh_id}")
+                        print(f"plc_data_rh에 추가됨: {last_rh_id}")
                     except MySQLdb.Error as err:
                         print(f"Insert Error: {err}")
 
@@ -103,32 +103,61 @@ try:
             # data9가 바뀌지 않았을 경우, 마지막 추가된 행 업데이트
             if last_inserted_table is not None:
                 if last_inserted_table == 'plc_data_lh':
+                    # 현재 data22, data23, data24 값을 가져오기
+                    cursor.execute(f"SELECT data22, data23, data24 FROM {last_inserted_table} WHERE id = {last_lh_id};")
+                    current_values = cursor.fetchone()
+            
+                    # 새로운 값을 추가할 리스트
+                    updated_values = []
+                    
+                    # 기존 값이 있을 경우 새로운 값을 추가
+                    for current_value, new_value in zip(current_values, (data3_value, data4_value, data5_value)):
+                        if current_value is None:
+                            updated_values.append(new_value)
+                        else:
+                            updated_values.append(f"{current_value},{new_value}")
+            
                     update_query = f"""
                     UPDATE {last_inserted_table} 
                     SET data22 = %s, data23 = %s, data24 = %s 
                     WHERE id = {last_lh_id};
                     """
-                    print(f"Updating last inserted row in {last_inserted_table} with values: ({data3_value}, {data4_value}, {data5_value})")
+                    print(f"Updating last inserted row in {last_inserted_table} with values: ({updated_values[0]}, {updated_values[1]}, {updated_values[2]})")
                     try:
-                        cursor.execute(update_query, (data3_value, data4_value, data5_value))
+                        cursor.execute(update_query, tuple(updated_values))
                         conn.commit()  # 수동으로 커밋
                         print(f"Updated last inserted row in {last_inserted_table}.")
                     except MySQLdb.Error as err:
                         print(f"Update Error: {err}")
-
+            
                 elif last_inserted_table == 'plc_data_rh':
+                    # 현재 data22, data23, data24 값을 가져오기
+                    cursor.execute(f"SELECT data22, data23, data24 FROM {last_inserted_table} WHERE id = {last_rh_id};")
+                    current_values = cursor.fetchone()
+            
+                    # 새로운 값을 추가할 리스트
+                    updated_values = []
+                    
+                    # 기존 값이 있을 경우 새로운 값을 추가
+                    for current_value, new_value in zip(current_values, (data3_value, data4_value, data5_value)):
+                        if current_value is None:
+                            updated_values.append(new_value)
+                        else:
+                            updated_values.append(f"{current_value},{new_value}")
+            
                     update_query = f"""
                     UPDATE {last_inserted_table} 
                     SET data22 = %s, data23 = %s, data24 = %s 
                     WHERE id = {last_rh_id};
                     """
-                    print(f"Updating last inserted row in {last_inserted_table} with values: ({data3_value}, {data4_value}, {data5_value})")
+                    print(f"Updating last inserted row in {last_inserted_table} with values: ({updated_values[0]}, {updated_values[1]}, {updated_values[2]})")
                     try:
-                        cursor.execute(update_query, (data3_value, data4_value, data5_value))
+                        cursor.execute(update_query, tuple(updated_values))
                         conn.commit()  # 수동으로 커밋
                         print(f"Updated last inserted row in {last_inserted_table}.")
                     except MySQLdb.Error as err:
                         print(f"Update Error: {err}")
+            
 
         # 커서와 연결 종료
         cursor.close()
