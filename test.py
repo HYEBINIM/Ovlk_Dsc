@@ -122,13 +122,26 @@ try:
                     SET data22 = %s, data23 = %s, data24 = %s 
                     WHERE id = {last_lh_id};
                     """
-                    print(f"Updating last inserted row in {last_inserted_table} with values: ({updated_values[0]}, {updated_values[1]}, {updated_values[2]})")
+                    print(f"업데이트 테이블 : {last_inserted_table} 값 : ({updated_values[0]}, {updated_values[1]}, {updated_values[2]})")
                     try:
                         cursor.execute(update_query, tuple(updated_values))
                         conn.commit()  # 수동으로 커밋
-                        print(f"Updated last inserted row in {last_inserted_table}.")
+
+                        # guide1 테이블 업데이트
+                        guide_update_query = """
+                        UPDATE guide1 
+                        SET data3 = %s, data4 = %s, data5 = %s, contents1 = %s 
+                        WHERE id = 2;
+                        """
+                        print(f"guide1 업데이트 쿼리 실행: {guide_update_query} with values: (0, 0, 0, 10)")
+                        cursor.execute(guide_update_query, (0, 0, 0, 10))
+                        conn.commit()  # 즉시 커밋
+                        print("guide1 테이블의 id=2 행이 업데이트되었습니다.")
+
+
+                        # print(f"마지막 업데이트 테이블 : {last_inserted_table}.")
                     except MySQLdb.Error as err:
-                        print(f"Update Error: {err}")
+                        print(f"업데이트 에러 : {err}")
             
                 elif last_inserted_table == 'plc_data_rh':
                     # 현재 data22, data23, data24 값을 가져오기
@@ -150,13 +163,26 @@ try:
                     SET data22 = %s, data23 = %s, data24 = %s 
                     WHERE id = {last_rh_id};
                     """
-                    print(f"Updating last inserted row in {last_inserted_table} with values: ({updated_values[0]}, {updated_values[1]}, {updated_values[2]})")
+                    print(f"업데이트 테이블 : {last_inserted_table} 값 : ({updated_values[0]}, {updated_values[1]}, {updated_values[2]})")
                     try:
                         cursor.execute(update_query, tuple(updated_values))
                         conn.commit()  # 수동으로 커밋
-                        print(f"Updated last inserted row in {last_inserted_table}.")
+
+                        # guide1 테이블 업데이트
+                        guide_update_query = """
+                        UPDATE guide1 
+                        SET data3 = %s, data4 = %s, data5 = %s, contents1 = %s 
+                        WHERE id = 2;
+                        """
+                        print(f"guide1 업데이트 쿼리 실행: {guide_update_query} with values: (0, 0, 0, 10)")
+                        cursor.execute(guide_update_query, (0, 0, 0, 10))
+                        conn.commit()  # 즉시 커밋
+                        print("guide1 테이블의 id=2 행이 업데이트되었습니다.")
+
+
+                        # print(f"마지막 업데이트 테이블 : {last_inserted_table}.")
                     except MySQLdb.Error as err:
-                        print(f"Update Error: {err}")
+                        print(f"업데이트 에러: {err}")
             
 
         # 커서와 연결 종료
