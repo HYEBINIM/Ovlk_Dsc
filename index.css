@@ -1,0 +1,238 @@
+:root{
+    --btn-background-color : #3867D6;
+    --btn-font-color : #fff;
+    --green-color : #20BF6B;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    --primary-color : #3867D6;
+    --background-color : #fff;
+    --panel-color : #F0F3F5;
+    --text-color : #29363d;
+    --btn-border : #fff;
+    --disable-color : #536c79;
+    --icon-color : #a2b8ec;
+    --red-color : #F03434;
+    --yellow-color : #F6BB42;
+}
+
+@font-face {
+    font-family: 'SCDream1';
+    src: url("/font/SCDream1.otf");
+}
+@font-face {
+    font-family: 'SCDream2';
+    src: url("/font/SCDream2.otf");
+}
+@font-face {
+    font-family: 'SCDream3';
+    src: url("/font/SCDream3.otf");
+}
+@font-face {
+    font-family: 'SCDream4';
+    src: url("/font/SCDream4.otf");
+}
+@font-face {
+    font-family: 'SCDream5';
+    src: url("/font/SCDream5.otf");
+}
+@font-face {
+    font-family: 'SCDream6';
+    src: url("/font/SCDream6.otf");
+}
+@font-face {
+    font-family: 'SCDream7';
+    src: url("/font/SCDream7.otf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: SCDream4;
+    font-size: 14px;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+table{
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th{
+    background: #a2b8ec;
+}
+
+.bottom_table tr,.bottom_table th,.bottom_table td{
+    height: 40px;
+    border: 1px solid black;
+}
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+}
+
+.top{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    border-bottom: 1px solid var(--disable-color);
+}
+
+.logo{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img{
+    width: auto;
+    height: calc(100% - 10px);
+}
+
+.title{
+    width: calc(100% - 400px);
+    height: 100%;
+    font-family: SCDream6;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content{
+    width: 100%;
+    height: calc(100% - 70px);
+    display: flex;
+    justify-content: space-between;
+}
+
+.left{
+    width: 70%;
+    height: 100%;
+    padding: 5px;
+    border-right: 1px solid var(--disable-color);
+}
+
+.left_top{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+}
+
+.img{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img img{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    max-height: 578px;
+}
+
+.okng{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 100px;
+    border: 1px solid var(--disable-color);
+    font-size: 40px;
+    font-family: SCDream6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.graph{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.graph_item{
+    width: 100%;
+    height: 33.3%;
+}
+
+.left_bottom{
+    width: 100%;
+    height: 30%;
+}
+
+.right{
+    width: 30%;
+    height: 100%;
+    padding: 5px;
+    border-left: 1px solid var(--disable-color);
+}
+
+.right_top{
+    width: 100%;
+    height: 70%;
+}
+
+.plc{
+    width: 100%;
+    height: 66.6%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.row{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.status{
+    width: calc(20% - 5px);
+    height: calc(100% - 5px);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons{
+    width: 100%;
+    height: calc(100% - 66.6%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons button{
+    width: 33%;
+    height: calc(50% - 5px);
+    background: var(--btn-background-color);
+    color: var(--btn-font-color);
+    box-shadow: var(--box-shadow);
+    border: none;
+    border-radius: 4px;
+}
+
+.right_bottom{
+    width: 100%;
+    height: 30%;
+}

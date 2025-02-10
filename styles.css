@@ -73,6 +73,11 @@ td {
     height: 100%;
 }
 
+.tdimg img{
+    width: 100%;
+    height: auto;
+}
+
 .tdamp {
     width: 50%;
     height: 25%;

@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Prepare SQL statement
-$sql = "SELECT * FROM plc_data_lh WHERE id = 1"; 
+$sql = "SELECT * FROM guide1 WHERE id = 1"; 
 $result = $conn->query($sql);
 
 header("Content-Type: application/json; charset=UTF-8");
@@ -27,9 +27,9 @@ if ($result->num_rows > 0) {
     echo json_encode(array(
         "status" => "success",
         "message" => "Data retrieved successfully",
-        "data10" => $row['data10'],
-        "data11" => $row['data11'],
-        "data12" => $row['data12'],
+        "data0" => $row['data0'],
+        "data1" => $row['data1'],
+        "data2" => $row['data2'],
         "data3" => $row['data3'],
         "data4" => $row['data4'],
         "data5" => $row['data5'],
