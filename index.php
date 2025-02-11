@@ -17,53 +17,17 @@
             <div class="title">Ov1k Welding Monitor</div>
         </div>
         <div class="content">
-            <div class="left">
-                <div class="left_top">
-                    <div class="img">
-                        <img src="/img/1.jpg" alt="">
-                        <div class="okng">ok</div>
-                    </div>
-                    <div class="graph">
-                        <div class=" graph_item graph1"><canvas id="lineChart1"></canvas></div>
-                        <div class=" graph_item graph2"><canvas id="lineChart2"></canvas></div>
-                        <div class=" graph_item graph3"><canvas id="lineChart3"></canvas></div>
-                    </div>
+            <div class="content_top">
+                <div class="img">
+                    <img src="/img/1.jpg" alt="">
                 </div>
-                <div class="left_bottom">
-                    <table class="bottom_table" id="dataTable1">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Amp Value</th>
-                                <th>Volt Value</th>
-                                <th>Flow Value</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataBody1">
-                            <!-- 데이터가 여기에 추가됩니다 -->
-                        </tbody>
-                    </table>
-                    <table class="bottom_table" id="dataTable2">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Point</th>
-                                <th>Amp Value</th>
-                                <th>Volt Value</th>
-                                <th>Flow Value</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataBody2">
-                            <!-- 데이터가 여기에 추가됩니다 -->
-                        </tbody>
-                    </table>
+                <div class="graph">
+                    <div class=" graph_item graph1"><canvas id="Voltage"></canvas></div>
+                    <div class=" graph_item graph2"><canvas id="Current"></canvas></div>
+                    <div class=" graph_item graph3"><canvas id="Flow"></canvas></div>
                 </div>
-            </div>
-            <div class="right">
-                <div class="right_top">
-                    <div class="plc">
+                <div class="plc">
+                    <div class="plc_item">
                         <div class="row">
                             <div class="status" data-index="1">실린더1</div>
                             <div class="status" data-index="2">실린더2</div>
@@ -93,29 +57,20 @@
                             <div class="status" data-index="20">문2</div>
                         </div>
                     </div>
-                    <div class="buttons">
-                        <button>버튼</button>
-                        <button>버튼</button>
-                        <button>버튼</button>
-                        <button>버튼</button>
-                        <button>버튼</button>
-                        <button>버튼</button>
-                    </div>
+                    <div class="okng">OK</div>
                 </div>
-                <div class="right_bottom">
-                    <table class="bottom_table" id="countTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>PartName</th>
-                                <th>Count</th>
-                            </tr>
-                        </thead>
-                        <tbody id="countBody">
-                            <!-- 데이터가 여기에 추가됩니다 -->
-                        </tbody>
-                    </table>
-                </div>
+            </div>
+            <div class="content_bottom">
+                <table class="bottom_table" id="dataTable1">
+                    <tbody id="dataBody1">
+                        <!-- 데이터가 여기에 추가됩니다 -->
+                    </tbody>
+                </table>
+                <table class="bottom_table" id="dataTable2">
+                    <tbody id="dataBody2">
+                        <!-- 데이터가 여기에 추가됩니다 -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -1,9 +1,25 @@
         let chart1, chart2, chart3;
         let data88, data99;
 
-        // 차트 생성 함수
         function createChart(canvasId) {
             const ctx = document.getElementById(canvasId).getContext('2d');
+            let borderColor;
+        
+            // 그래프에 따라 색상 설정
+            switch (canvasId) {
+                case 'Voltage':
+                    borderColor = 'rgb(99, 167, 255)'; // 민트색
+                    break;
+                case 'Current':
+                    borderColor = 'rgba(255, 99, 132, 1)'; // 핑크색
+                    break;
+                case 'Flow':
+                    borderColor = 'rgb(235, 172, 54)'; // 파란색
+                    break;
+                default:
+                    borderColor = '#7aba25'; // 기본 색상
+            }
+        
             return new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -13,21 +29,15 @@
                         '11', '12', '13', '14', '15',
                         '16', '17', '18', '19', '20',
                         '21', '22', '23', '24', '25',
-                        '26', '27', '28', '29', '20'
+                        '26', '27', '28', '29', '30'
                     ],
                     datasets: [{
-                        label: `Data for ${canvasId}`,
-                        data: [
-                            0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0
-                        ],
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        label: `${canvasId}`,
+                        data: Array(30).fill(0), // 초기 데이터 배열
+                        borderColor: borderColor,
                         borderWidth: 2,
-                        fill: false
+                        fill: false,
+                        // pointRadius: 0, // 포인트 제거
                     }]
                 },
                 options: {
@@ -35,24 +45,36 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            display: true,
-                            position: 'top',
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            borderColor: borderColor,
+                            borderWidth: 1,
                         }
                     },
                     scales: {
                         x: {
-                            display: true
+                            display: true,
+                            grid: {
+                                display: false // X축 격자 숨기기
+                            }
                         },
                         y: {
                             display: true,
                             beginAtZero: false,
                             min: 0,
-                            max: 5000
+                            max: 5000,
+                            grid: {
+                                display: false // Y축 격자 숨기기
+                            }
                         }
                     }
                 }
             });
         }
+      
+        
 
         // 차트를 업데이트하는 함수
         function updateChart(chart, newData) {
@@ -100,19 +122,29 @@
                 method: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    // console.log('get_data1 응답:', data); // 추가된 로그
-                    $('#dataBody1').empty(); // dataBody1로 수정
-
+                    $('#dataBody1').empty(); // dataBody1 초기화
+        
                     data.forEach((row) => {
+                         // data2, data3, data4의 요소를 동적으로 생성
+                         const voltageItems = row.data2.map(item => `<div class='data_item'>${item}</div>`).join(''); // 콤마 없이 연결
+                         const currentItems = row.data3.map(item => `<div class='data_item'>${item}</div>`).join(''); // 콤마 없이 연결
+                         const flowItems = row.data4.map(item => `<div class='data_item'>${item}</div>`).join(''); // 콤마 없이 연결
+         
                         $('#dataBody1').append(`
-                    <tr>
-                        <td>${row.data1}</td>
-                        <td>${row.data2}</td>
-                        <td>${row.data3}</td>
-                        <td>${row.data4}</td>
-                        <td>${row.data5}</td>
-                    </tr>
-                `);
+                            <tr>
+                                <td><div class='td_state'></div></td>
+                                <td class='td_id'>${row.data1}</td>
+                                <td class='td_title'>전압<br>전류<br>플로우</td>
+                                <td>
+                                    ${voltageItems}
+                                    <br>
+                                    ${currentItems}
+                                    <br>
+                                    ${flowItems}
+                                </td>
+                                <td class='td_time'>${row.data5}</td>
+                            </tr>
+                        `);
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -120,6 +152,7 @@
                 }
             });
         }
+        
 
         function get_data2() {
             $.ajax({
@@ -134,9 +167,7 @@
                         $('#dataBody2').append(`
                     <tr>
                         <td>${row.data1}</td>
-                        <td>${row.data2}</td>
-                        <td>${row.data3}</td>
-                        <td>${row.data4}</td>
+                        <td>${row.data2}<br>${row.data3}<br>${row.data4}</td> <!-- 하나의 열로 합침 -->
                         <td>${row.data5}</td>
                     </tr>
                 `);
@@ -165,7 +196,7 @@
                         // 각 데이터 값에 따라 색상 변경
                         for (let i = 1; i <= 20; i++) {
                             if (plcData[`data${i}`] == "1") {
-                                $(`.status[data-index='${i}']`).css('background-color', 'lightgreen'); // 색상 변경
+                                $(`.status[data-index='${i}']`).css('background-color', '#0397bf');
                             }
                         }
                     }
@@ -178,32 +209,32 @@
         
         
 
-        function get_count() {
-            $.ajax({
-                url: '/get/get_count.php',
-                method: 'GET',
-                dataType: 'json',
-                success: function (data) {
+        // function get_count() {
+        //     $.ajax({
+        //         url: '/get/get_count.php',
+        //         method: 'GET',
+        //         dataType: 'json',
+        //         success: function (data) {
 
-                    // 테이블 바디 초기화
-                    $('#countBody').empty();
+        //             // 테이블 바디 초기화
+        //             $('#countBody').empty();
 
-                    // 데이터를 5줄로 표시
-                    data.forEach((row, index) => {
-                        $('#countBody').append(`
-                    <tr>
-                        <td>${row.id}</td> <!-- Jig (여기서는 임의로 설정) -->
-                        <td>${row.lot}</td> <!-- Point (여기서는 임의로 설정) -->
-                        <td>${row.count}</td> // 현재 시간
-                    </tr>
-                `);
-                    });
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error('오류:', textStatus, errorThrown);
-                }
-            });
-        }
+        //             // 데이터를 5줄로 표시
+        //             data.forEach((row, index) => {
+        //                 $('#countBody').append(`
+        //             <tr>
+        //                 <td>${row.id}</td> <!-- Jig (여기서는 임의로 설정) -->
+        //                 <td>${row.lot}</td> <!-- Point (여기서는 임의로 설정) -->
+        //                 <td>${row.count}</td> // 현재 시간
+        //             </tr>
+        //         `);
+        //             });
+        //         },
+        //         error: function (jqXHR, textStatus, errorThrown) {
+        //             console.error('오류:', textStatus, errorThrown);
+        //         }
+        //     });
+        // }
 
         document.getElementById('dataTable1').style.display = 'table'; // dataTable1 보이기
         document.getElementById('dataTable2').style.display = 'none';  // dataTable2 숨기기
@@ -239,15 +270,15 @@
             get_data1();
             get_data2();
             get_plc_control();
-            get_count();
+            // get_count();
             get_state()
         }
 
         document.addEventListener('DOMContentLoaded', function () {
             // 차트 초기화
-            chart1 = createChart('lineChart1');
-            chart2 = createChart('lineChart2');
-            chart3 = createChart('lineChart3');
+            chart1 = createChart('Voltage');
+            chart2 = createChart('Current');
+            chart3 = createChart('Flow');
 
             setInterval(update, 1000);
 
